@@ -59,67 +59,37 @@ def shut_down():
   ser.close()
   return
 
-# def convert_cmd_vel(msg):
+def convert_cmd_vel(msg):
 
-#     global wheel_radius, robot_width, left_speed, right_speed, max_speed, min_speed 
+    global wheel_radius, robot_width, front_left_w, front_right_w, rear_left_w, rear_right_w, max_speed, min_speed, separation_bet_wheels 
+    a = wheel_radius
+    d = robot_width
+    l = separation_bet_wheels/2
     
-#     cmd_linear_vel = msg.linear.x*1000.0 # in mm/sec
-#     cmd_angular_vel = msg.angular.z # in rad/sec
-#     f_r_speed = ((2.0*cmd_linear_vel) + (cmd_angular_vel*robot_width))/(2*wheel_radius) #in rad/sec
-#     f_l_speed = ((2.0*cmd_linear_vel) - (cmd_angular_vel*robot_width))/(2*wheel_radius) #in rad/sec
-#     r_r_speed = ((2.0*cmd_linear_vel) + (cmd_angular_vel*robot_width))/(2*wheel_radius) #in rad/sec
-#     r_l_speed = ((2.0*cmd_linear_vel) - (cmd_angular_vel*robot_width))/(2*wheel_radius) #in rad/sec
 
-     
-#     f_r_speed = f_r_speed/(2*3.14) #in revolutions per second
-#     f_l_speed = f_l_speed/(2*3.14)
-#     r_r_speed = r_r_speed/(2*3.14) #in revolutions per second
-#     r_l_speed = r_l_speed/(2*3.14)
+    x_vel = msg.linear.x 
+    y_vel = msg.linear.y
+    w_vel = msg.angular.z
 
-#     vel_rl_max = max(f_r_speed,f_l_speed,r_l_speed,r_r_speed)
-#     vel_rl_min = min(f_r_speed,f_l_speed,r_l_speed,r_r_speed)
+    cmd_vel_matrix = np.array([[x_vel],
+                               [y_vel],
+                               [w_vel]])
+    
+    conversion_matrix = np.array([[1, 1, 1, 1],
+                                  [1, -1, 1, -1]
+                                  [1/(l-d), 1/(l-d), 1/(d-l), 1/(d-l)]])
+    
+    inverse_conversion_matrix = np.linalg.inv(conversion_matrix)
 
-#     if cmd_linear_vel != 0 and cmd_angular_vel != 0:
-#         if vel_rl_max > max_speed:
-#             f_r_speed = f_r_speed - (vel_rl_max-max_speed)
-#             f_l_speed = f_l_speed - (vel_rl_max-max_speed)
-#             r_r_speed = r_r_speed - (vel_rl_max-max_speed)
-#             r_l_speed = r_l_speed - (vel_rl_max-max_speed)
-#         elif vel_rl_max < -max_speed:
-#             f_r_speed = f_r_speed - (vel_rl_max+max_speed)
-#             f_l_speed = f_l_speed - (vel_rl_max+max_speed)
-#             r_r_speed = r_r_speed - (vel_rl_max+max_speed)
-#             r_l_speed = r_l_speed - (vel_rl_max+max_speed)
+    wheel_ang_vel = (4/a) * inverse_conversion_matrix * cmd_vel_matrix
 
-#         if abs(r_l_speed) < min_speed or abs(r_r_speed) < min_speed or abs(f_r_speed) < min_speed or abs(f_l_speed) < min_speed:
-#             if abs(f_r_speed - f_l_speed) < 2*min_speed or abs(r_r_speed - r_l_speed) < 2*min_speed:
-#                 r_l_speed = math.copysign(min_speed,r_l_speed)
-#                 r_r_speed = math.copysign(min_speed,r_r_speed)
-#                 f_l_speed = math.copysign(min_speed,f_l_speed)
-#                 f_r_speed = math.copysign(min_speed,f_r_speed)
-#             else:
-#                 if abs(r_l_speed) < min_speed:
-#                     speed_sign = math.copysign(min_speed, r_l_speed)
-#                     r_r_speed = r_r_speed + (speed_sign - r_l_speed)
-#                     r_l_speed = speed_sign
-#                 if abs(r_r_speed) < min_speed:
-#                     speed_sign = math.copysign(min_speed, r_r_speed)
-#                     r_l_speed = r_l_speed + (speed_sign - r_r_speed)
-#                     r_r_speed = speed_sign
-#                 if abs(f_l_speed) < min_speed:
-#                     speed_sign = math.copysign(min_speed, f_l_speed)
-#                     f_r_speed = f_r_speed + (speed_sign - f_l_speed)
-#                     f_l_speed = speed_sign
-#                 if abs(f_r_speed) < min_speed:
-#                     speed_sign = math.copysign(min_speed, f_r_speed)
-#                     f_l_speed = f_l_speed + (speed_sign - f_r_speed)
-#                     f_r_speed = speed_sign
+    front_left_w = wheel_ang_vel[0][0]
+    front_right_w = wheel_ang_vel[1][0]
+    rear_left_w = wheel_ang_vel[2][0]
+    rear_right_w = wheel_ang_vel[3][0]
 
-#         front_right_speed = f_r_speed
-#         front_left_speed = f_l_speed
-#         rear_left_speed = r_l_speed
-#         rear_right_speed = r_r_speed
-#         return
+    return
+
     
 
 def main_fun():
