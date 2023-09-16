@@ -1,4 +1,4 @@
-#define TRIG_PIN 
+#define TRIG_PIN 9
 #define ECHO_PIN 8
 
 void setup() {
