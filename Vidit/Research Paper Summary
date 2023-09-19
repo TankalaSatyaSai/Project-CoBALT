@@ -3,51 +3,71 @@
 
 #CODE THAT TAKES ENCODER READINGS AS INPUTS AND GIVES PREDICTED POSITION AS OUTPUT
 
+#!/usr/bin/env python
+
+import rospy
 import numpy as np
+from sensor_msgs.msg import Imu
+from sensor_msgs.msg import JointState
+from geometry_msgs.msg import Twist
+from tf.transformations import euler_from_quaternion
 
-wheel_radius = 0.05  
-wheel_base = 0.2     
+def imu_callback(data):
+    # Gyroscope data (radians/second)
+    gyro_angular_velocity = data.angular_velocity.z
 
-encoder_counts_per_second = [100, -110, -110, 110]
-time_elapsed_encoder = 0.1 
+    # Calculate the acceleration-based orientation
+    acceleration_angle = np.arctan2(data.linear_acceleration.y, data.linear_acceleration.x)
 
-# Accelerometer data (m/s^2)
-acceleration_x = 0.00
-acceleration_y = 0.00
+    # Combine gyroscope and accelerometer-based orientation using the complementary filter
+    theta = alpha * (theta_gyro + theta) + (1 - alpha) * acceleration_angle
 
-# Gyroscope data (radians/second)
-gyro_angular_velocity = 0.0
+def encoder_callback(data):
+    # Assuming encoder data contains wheel velocities
+    wheel_velocities = [encoder.data for encoder in data.position]
 
-# Complementary filter parameters
-alpha = 0.7  
+    # Wheel velocities in m/s for each wheel
+    v1, v2, v3, v4 = wheel_velocities
 
-# Initial robot position and orientation
-x = 0.0
-y = 0.0
-theta = 0.0
+    # Calculate linear and angular velocities of the robot
+    vx = (1 / 4) * (v1 + v2 + v3 + v4)
+    vy = (1 / 4) * (v1 - v2 - v3 + v4)
+    omega = (1 / (4 * wheel_base)) * (v1 - v2 + v3 - v4)
 
-# Calculate linear velocities from wheel encoders
-wheel_velocities = [count / 360 * 2 * np.pi * wheel_radius for count in encoder_counts_per_second]
+    # Update the robot's position based on its previous position and estimated velocities
+    x += vx * np.cos(theta) * time_elapsed_encoder
+    y += vy * np.sin(theta) * time_elapsed_encoder
 
-# Wheel velocities in m/s for each wheel
-v1, v2, v3, v4 = wheel_velocities
+    # Publish the current position
+    current_position_msg = Twist()
+    current_position_msg.linear.x = x
+    current_position_msg.linear.y = y
+    current_position_msg.angular.z = theta
+    position_publisher.publish(current_position_msg)
 
-# Calculate linear and angular velocities of the robot
-vx = (1 / 4) * (v1 + v2 + v3 + v4)
-vy = (1 / 4) * (v1 - v2 - v3 + v4)
-omega = (1 / (4 * wheel_base)) * (v1 - v2 + v3 - v4)
+if __name__ == '__main__':
+    # ROS node initialization
+    rospy.init_node('robot_position_tracker')
 
-# Complementary filter for orientation estimation
-theta_gyro = gyro_angular_velocity * time_elapsed_encoder
-acceleration_angle = np.arctan2(acceleration_y, acceleration_x)
-theta = alpha * (theta_gyro + theta) + (1 - alpha) * acceleration_angle
+    # Complementary filter parameters
+    alpha = 0.98  # Weight for accelerometer data (adjust as needed)
 
-# Update the robot's position based on its previous position and estimated velocities
-x += vx * np.cos(theta) * time_elapsed_encoder
-y += vy * np.sin(theta) * time_elapsed_encoder
+    # Wheel properties
+    wheel_base = 0.2  # Distance between the wheels (adjust as needed)
 
-print("Linear Velocity (vx): {:.2f} m/s".format(vx))
-print("Linear Velocity (vy): {:.2f} m/s".format(vy))
-print("Angular Velocity (omega): {:.2f} rad/s".format(omega))
-print("Estimated Orientation (theta): {:.2f} radians".format(theta))
-print("Current Position (x, y): ({:.2f}, {:.2f}) meters".format(x, y))
+    # Initial robot position and orientation
+    x = 0.0
+    y = 0.0
+    theta = 0.0
+
+    # Time elapsed between encoder readings (in seconds)
+    time_elapsed_encoder = 0.1  # Adjust this value based on your encoder reading frequency
+
+    # Subscribers for sensor data
+    imu_subscriber = rospy.Subscriber('/imu', Imu, imu_callback)
+    encoder_subscriber = rospy.Subscriber('/joint_states', JointState, encoder_callback)
+
+    # Publisher for current position
+    position_publisher = rospy.Publisher('/current_position', Twist, queue_size=10)
+
+    rospy.spin()
