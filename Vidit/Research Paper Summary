@@ -1,8 +1,9 @@
 #add all the info that you got by reading your set of research papers. 
 # Set No : ____
 
-import numpy as np
+#CODE THAT TAKES ENCODER READINGS AS INPUTS AND GIVES PREDICTED POSITION AS OUTPUT
 
+import numpy as np
 
 wheel_radius = 0.05  
 wheel_base = 0.2     
