@@ -1,2 +1,52 @@
 #add all the info that you got by reading your set of research papers. 
 # Set No : ____
+
+import numpy as np
+
+
+wheel_radius = 0.05  
+wheel_base = 0.2     
+
+encoder_counts_per_second = [100, -110, -110, 110]
+time_elapsed_encoder = 0.1 
+
+# Accelerometer data (m/s^2)
+acceleration_x = 0.00
+acceleration_y = 0.00
+
+# Gyroscope data (radians/second)
+gyro_angular_velocity = 0.0
+
+# Complementary filter parameters
+alpha = 0.7  
+
+# Initial robot position and orientation
+x = 0.0
+y = 0.0
+theta = 0.0
+
+# Calculate linear velocities from wheel encoders
+wheel_velocities = [count / 360 * 2 * np.pi * wheel_radius for count in encoder_counts_per_second]
+
+# Wheel velocities in m/s for each wheel
+v1, v2, v3, v4 = wheel_velocities
+
+# Calculate linear and angular velocities of the robot
+vx = (1 / 4) * (v1 + v2 + v3 + v4)
+vy = (1 / 4) * (v1 - v2 - v3 + v4)
+omega = (1 / (4 * wheel_base)) * (v1 - v2 + v3 - v4)
+
+# Complementary filter for orientation estimation
+theta_gyro = gyro_angular_velocity * time_elapsed_encoder
+acceleration_angle = np.arctan2(acceleration_y, acceleration_x)
+theta = alpha * (theta_gyro + theta) + (1 - alpha) * acceleration_angle
+
+# Update the robot's position based on its previous position and estimated velocities
+x += vx * np.cos(theta) * time_elapsed_encoder
+y += vy * np.sin(theta) * time_elapsed_encoder
+
+print("Linear Velocity (vx): {:.2f} m/s".format(vx))
+print("Linear Velocity (vy): {:.2f} m/s".format(vy))
+print("Angular Velocity (omega): {:.2f} rad/s".format(omega))
+print("Estimated Orientation (theta): {:.2f} radians".format(theta))
+print("Current Position (x, y): ({:.2f}, {:.2f}) meters".format(x, y))
