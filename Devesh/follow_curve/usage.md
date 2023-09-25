@@ -95,13 +95,13 @@ def calculate_vel(msg):
 
 ### The graph of target_x points and current_x points is 
 ```
-![Error in loading the file](URL)
+![Error in loading the file](./X.png)
 
 ```
 
 
 ### The graph of target_y points and current_y points is 
 ```
-![Error in loading the file](URL)
+![Error in loading the file](./Y.png)
 
 ```
