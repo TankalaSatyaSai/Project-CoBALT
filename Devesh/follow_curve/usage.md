@@ -94,14 +94,12 @@ def calculate_vel(msg):
 ### For demonstration purpose we used the y=4**x eq
 
 ### The graph of target_x points and current_x points is 
-```
+
 ![Error in loading the file](./X.png)
 
-```
+
 
 
 ### The graph of target_y points and current_y points is 
-```
-![Error in loading the file](./Y.png)
 
-```
+![Error in loading the file](./Y.png)
