@@ -1,0 +1,68 @@
+import numpy as np
+
+def hungarian_algorithm(cost_matrix):
+    # Step 1: Row Reduction
+    cost_matrix -= np.min(cost_matrix, axis=1, keepdims=True)
+
+    # Step 2: Column Reduction
+    cost_matrix -= np.min(cost_matrix, axis=0, keepdims=True)
+
+    # Step 3: Draw Lines to Cover Zeros
+    covered_rows = np.zeros(cost_matrix.shape[0], dtype=bool)
+    covered_cols = np.zeros(cost_matrix.shape[1], dtype=bool)
+    cover_zeros(cost_matrix, covered_rows, covered_cols)
+
+    # Steps 4-7: Create Zeros, Repeat, and Optimality Check
+    while not check_optimality(covered_rows, covered_cols):
+        min_uncovered_value = find_min_uncovered_value(cost_matrix, covered_rows, covered_cols)
+        cost_matrix = update_matrix(cost_matrix, covered_rows, covered_cols, min_uncovered_value)
+        covered_rows.fill(0)
+        covered_cols.fill(0)
+        cover_zeros(cost_matrix, covered_rows, covered_cols)
+
+    # Step 8: Extract Assignments
+    assignments = extract_assignments(cost_matrix)
+    
+    return assignments
+
+def cover_zeros(cost_matrix, covered_rows, covered_cols):
+    for i in range(cost_matrix.shape[0]):
+        for j in range(cost_matrix.shape[1]):
+            if cost_matrix[i, j] == 0 and not covered_rows[i] and not covered_cols[j]:
+                covered_rows[i] = True
+                covered_cols[j] = True
+
+def check_optimality(covered_rows, covered_cols):
+    return np.sum(covered_rows) + np.sum(covered_cols) == len(covered_rows)
+
+def find_min_uncovered_value(cost_matrix, covered_rows, covered_cols):
+    min_uncovered_value = np.inf
+    for i in range(cost_matrix.shape[0]):
+        for j in range(cost_matrix.shape[1]):
+            if not covered_rows[i] and not covered_cols[j]:
+                min_uncovered_value = min(min_uncovered_value, cost_matrix[i, j])
+    return min_uncovered_value
+
+def update_matrix(cost_matrix, covered_rows, covered_cols, min_uncovered_value):
+    for i in range(cost_matrix.shape[0]):
+        for j in range(cost_matrix.shape[1]):
+            if covered_rows[i] and covered_cols[j]:
+                cost_matrix[i, j] += min_uncovered_value
+            elif not covered_rows[i] and not covered_cols[j]:
+                cost_matrix[i, j] -= min_uncovered_value
+    return cost_matrix
+
+def extract_assignments(cost_matrix):
+    assignments = []
+    for i in range(cost_matrix.shape[0]):
+        j = np.argmax(cost_matrix[i, :] == 0)
+        assignments.append((i+1, j+1))  # Adjust indices to start from 1
+    return assignments
+
+# Example usage
+cost_matrix = np.array([[8, 6, 10],
+                       [9, 7, 4],
+                       [3, 2, 6]])
+
+result = hungarian_algorithm(cost_matrix)
+print("Optimal Assignments:", result)
