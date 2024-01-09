@@ -18,11 +18,11 @@
 - [Tejaswini](#Tejaswini)
 
 ## Software:
-- [Atharva](#Atharva)
-- [Devesh](#Devesh)
-- [Harshini](#Harshini)
-- [Praneeth](#Praneeth)
-- [Vidit](#Vidit) 
+- [Atharva](https://github.com/TankalaSatyaSai/minions/tree/main/Atharva)
+- [Devesh](https://github.com/TankalaSatyaSai/minions/tree/main/Devesh)
+- [Harshini](https://github.com/TankalaSatyaSai/minions/tree/main/Harshini)
+- [Praneeth](https://github.com/TankalaSatyaSai/minions/tree/main/Praneeth)
+- [Vidit](https://github.com/TankalaSatyaSai/minions/tree/mainVidit) 
 
 ## Why did we choose that solution: We chose Swarm robotics because it excels in adapting to dynamic environments, making it suitable for warehouses with changing layouts, varying package sizes, and dynamic obstacles. The adaptive nature ensures robust performance in real-world scenarios. This leads to optimized path planning, efficient obstacle avoidance, and minimized total distance traveled, contributing to overall efficiency in package transportation.
 
