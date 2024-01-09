@@ -41,6 +41,7 @@
 - Created a map using rpLidar and Hector SLAM algorithm
 - Implemented the other lidar slam algorithms as well and figure out which one works best for our project
 - Research of sensor fusion and various algorithms needed for it like Kalmann, IMM,Particle Filters etc.
+- Online simulation of objects in Coppeliasim software
 - Codes for ultrasonic ,rplidar, april tag.
 - Codes for communication between arduino, ros and ultrasonics without buffer and made launch files.
 - Global planners A* and RRT* are done with the codes, yet to be tested.
