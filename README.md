@@ -40,7 +40,7 @@ We chose Swarm robotics because it excels in adapting to dynamic environments, m
 
 In software module we majorly focus on enabling effective communication and coordination among the swarm robots which needs path planning using global and local planners, computer vision, localisation and mapping. Path planning is vital for delivering packages and are responsible for determining the optimal paths for each robot to navigate through the environment, avoiding obstacles, and reaching their destinations while minimizing travel time. Computer vision is needed as it helps the robots in identifying obstacles, plan optimal paths, and avoid collisions during package delivery. Accurate localization and mapping algorithms is crucial for effective coordination and navigation, especially in scenarios where precise package delivery is required. Key features covered includes A* and RRT* algorithm, MPC, Yolo models, extended kalman filters,2-D LIDAR SLAM algorithms
 
-### Past works
+### Past Works
 
 - Checked how basic robot works in rviz,gazebo
 - Codes for Communication between jetson nano and arduino
@@ -55,7 +55,7 @@ In software module we majorly focus on enabling effective communication and coor
 - Codes for communication between arduino, ros and ultrasonics without buffer and made launch files.
 - Global planners A* and RRT* are done with the codes, yet to be tested.
 
-### Current works
+### Current Works
 
 
 - To complete the local planner code, test the global planner codes and  build the navigation stack
@@ -63,4 +63,11 @@ In software module we majorly focus on enabling effective communication and coor
 - Working on the multi system communication codes and the swarm codes
 - To complete the whole localisation stack
 - Swarm tech in a simulated environment
+
+### Future Works
+
+- Swarm and multiple robots coordination in the warehouse environment
+- Human and robot collaboration where we may use interfaces to communicate goals, preferences, or changes in the task to the robot swarm, allowing for dynamic adjustments in real-time.
+- Usage of Joy stick and Joy nodes
+
 
