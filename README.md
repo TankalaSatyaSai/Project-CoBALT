@@ -20,7 +20,7 @@
 ## Software:
 - [Atharva](https://github.com/TankalaSatyaSai/minions/tree/main/Atharva)
 - [Devesh](https://github.com/TankalaSatyaSai/minions/tree/main/Devesh)
-- [Harshini](https://github.com/TankalaSatyaSai/minions/tree/main/Harshini)
+- [Harshinni](https://github.com/TankalaSatyaSai/minions/tree/main/Harshinni)
 - [Praneeth](https://github.com/TankalaSatyaSai/minions/tree/main/Praneeth)
 - [Vidit](https://github.com/TankalaSatyaSai/minions/tree/mainVidit) 
 
@@ -60,6 +60,53 @@
 - Swarm and multiple robots coordination in the warehouse environment
 - Human and robot collaboration where we may use interfaces to communicate goals, preferences, or changes in the task to the robot swarm, allowing for dynamic adjustments in real-time.
 - Usage of Joy stick and Joy nodes
+
+### Various swarm algorithms researched
+
+- Ant Colony Optimization (ACO):
+        ACO is inspired by the foraging behavior of ants. Ants deposit pheromones to communicate with each other, and the algorithm uses these artificial pheromones to find optimal paths in combinatorial optimization problems.
+  
+- Particle Swarm Optimization :
+        This is inspired by the social behavior of bird flocks and fish schools. Particles (representing potential solutions robot in our case) adjust their positions based on their own experience and the best solution found by any particle in the swarm.
+
+- Artificial Bee Colony :
+        Inspiration from Bee Foraging. The algorithm simulates the exploration-exploitation trade-off observed in bees' search for food sources.
+
+- Bacterial Foraging Optimization (BFO):
+        BFO models the chemotactic movement of bacteria towards nutrient-rich areas. The algorithm simulates the bacterial foraging process, including chemotaxis, reproduction, and elimination-dispersal events.
+
+- Firefly Algorithm :
+        Bioluminescent Communication: The Firefly Algorithm is inspired by the flashing behavior of fireflies. Fireflies use bioluminescence to attract mates, and the algorithm models the optimization process based on the attractiveness of solutions.
+
+- Wolf Pack Algorithm:
+       WPA is inspired by the cooperative hunting behavior of wolf packs. It involves alpha, beta, and omega wolves that represent the best, intermediate, and worst solutions in the optimization space.
+
+- Fish Schooling Algorithm :
+        FSA is inspired by the collective behavior of fish in schools. It mimics the coordinated movement of fish to optimize solutions through interactions between individuals in the algorithmic school.
+
+- Bee Colony Algorithm :
+        BCA is inspired by the swarming behavior of honeybees. It mimics the collective decision-making process of bees in choosing a new nest location during swarming.
+               
+- Plant Growth Algorithm (PGA):
+        PGA simulates the growth and development process observed in plants. The algorithm models the growth of roots, stems, and leaves to optimize solutions in a search space.
+
+- Spider Monkey Optimization (SMO):
+         SMO is inspired by the foraging behavior of spider monkeys. The algorithm mimics their movements in search of optimal food sources and exploration and exploitation.
+
+- Cuckoo Search Algorithm :
+        CSA is inspired by the brood parasitism of cuckoo birds. The algorithm includes a mechanism where certain eggs (solutions) are laid by host birds (exploited solutions), simulating the optimization process.
+
+- Fungal Foraging Optimization Algorithm :
+        FOA is inspired by the foraging behavior of fungi. The algorithm simulates the growth and branching patterns of fungal mycelium to optimize solutions in the search space.
+
+- Algae-Inspired Algorithm (AIA):
+        AIA draws inspiration from the photosynthetic and growth processes of algae. The algorithm incorporates mechanisms inspired by algae behavior to optimize solutions in a search space.
+
+- A RRT (A-Star Rapidly Exploring Random Tree):*
+        Combination of A and RRT:* A* RRT is a hybrid algorithm combining the A* search algorithm and Rapidly Exploring Random Trees (RRT). It aims to find an optimal path in a space efficiently by using branches of trees ideas
+        
+- Flock of Birds Algorithm:
+        Collective Movement of Birds: FBA is inspired by the coordinated movement of bird flocks. The algorithm mimics the collective behavior of birds in a flock to optimize solutions through interactions between individuals.
 
 ## Codes and their execution :
 ### 1.For communication between RPI and controller : In the /Devesh/control_and_comminication folder execute 
