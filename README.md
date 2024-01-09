@@ -9,13 +9,13 @@
 ## About the Team And CFI :
 
 ## Electronic:
-- [Anirudhha](#Aniruddha)
-- [Justin](#Justin)
+- [Anirudhha](https://github.com/TankalaSatyaSai/minions/tree/main/Aniruddha)
+- [Justin](https://github.com/TankalaSatyaSai/minions/tree/main/Justin)
 
 
 ## Mechanical:
-- [Satya](#Satya)
-- [Tejaswini](#Tejaswini)
+- [Satya](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
+- [Tejaswini](https://github.com/TankalaSatyaSai/minions/tree/main/Tejaswini)
 
 ## Software:
 - [Atharva](https://github.com/TankalaSatyaSai/minions/tree/main/Atharva)
