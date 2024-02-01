@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['Box', 'ForkLift', 'Human', 'Pallet']
+
+roboflow:
+  workspace: veeck
+  project: 1000ware
+  version: 12
+  license: Public Domain
+  url: https://universe.roboflow.com/veeck/1000ware/dataset/12
