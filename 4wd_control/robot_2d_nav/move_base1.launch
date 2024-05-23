@@ -1,0 +1,33 @@
+<launch>
+
+  <!-- <master auto="start"/> -->
+ <!-- Run the map server --> 
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2d_nav)/world.yaml">
+    
+    </node>
+
+   <node pkg="amcl" type="amcl" name="amcl" respawn="true">
+      <param name="initial_pose_x" value="0.0" />
+      <param name="initial_pose_y" value="0.0" />
+      <param name="initial_pose_a" value="0.0" />
+      <param name="initial_cov_xx" value="0.01" />
+      <param name="initial_cov_yy" value="0.01" />
+      <param name="initial_cov_aa" value="0.01" />
+   </node>
+ <!--- Run AMCL --> 
+   <!-- <include file="$(find amcl)/examples/amcl_omni.launch" />  -->
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find robot_2d_nav)/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find robot_2d_nav)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find robot_2d_nav)/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robot_2d_nav)/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find robot_2d_nav)/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find robot_2d_nav)/global_planner_params.yaml" command="load" />
+
+ </node>
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 map base_link" /> -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 base_link base_footprint" />
+
+ <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_2d_nav)/config/rviz_config.rviz" required="true" />
+
+</launch>
