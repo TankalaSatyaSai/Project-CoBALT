@@ -20,11 +20,11 @@ By achieving these objectives, our solution seeks to overcome the limitations of
 ## About the Team And CFI :
 
 ## Mechatronics:
-- [Satya](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
+- [Satya Sai](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
 - [Tejaswini](https://github.com/TankalaSatyaSai/minions/tree/main/Tejaswini)
 
 ## Software:
-- [Satya](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
+- [Satya Sai](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
 - [Atharva](https://github.com/TankalaSatyaSai/minions/tree/main/Atharva)
 - [Devesh](https://github.com/TankalaSatyaSai/minions/tree/main/Devesh)
 - [Harshinni](https://github.com/TankalaSatyaSai/minions/tree/main/Harshinni)
