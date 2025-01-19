@@ -112,16 +112,16 @@ By achieving these objectives, our solution seeks to overcome the limitations of
         Collective Movement of Birds: FBA is inspired by the coordinated movement of bird flocks. The algorithm mimics the collective behavior of birds in a flock to optimize solutions through interactions between individuals.
 
 ## Codes and their execution :
-### 1.For communication between RPI and controller: In the /Devesh/control_and_comminication folder, execute 
+### 1.For communication between RPI and controller: In the 4WD_Control folder, execute 
 ```bash
 python3 rpi_vel_code.py
 
 ```
-### This file will establish the serial communication between them. This file will be used to send the velocity inputs to the controller based on the kinematic modeling of the wheels. In the same folder the file “ new_motor_arduino_ino.ino “ will be programmed into the controller, it contains the pid control.
+### This file will establish the serial communication between them. This file will be used to send the velocity inputs to the controller based on the kinematic modeling of the wheels. In the urc10_control the file “ new_motor_arduino_ino.ino “ will be programmed into the controller, it contains the pid control.
 
 ### 2.Robot Description: The folder “ robot description” contains the robot's meshes and urdf code, and it is equipped with ultrasonic sensors and lidar. We must include that urdf file in the launch file and execute that file in the gazebo.
 
-### 3. Follow curve: Based on the waypoints, we have the script “ waypoint_methond.py “ in the/Devesh/follow_curve folder, which moves the robot from one point to another. Run the following commands for execution :
+### 3. Follow curve: Based on the waypoints, we have the script “ waypoint_methond.py “ in the follow_curve folder, which moves the robot from one point to another. Run the following commands for execution :
 ```bash
 python3 waypoinst.py
 rosrun <package_name>  waypoint_methond.py
