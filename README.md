@@ -25,11 +25,8 @@ By achieving these objectives, our solution seeks to overcome the limitations of
 
 ## Software:
 - [Satya Sai](https://github.com/TankalaSatyaSai/minions/tree/main/Satya)
-- [Atharva](https://github.com/TankalaSatyaSai/minions/tree/main/Atharva)
 - [Devesh](https://github.com/TankalaSatyaSai/minions/tree/main/Devesh)
 - [Harshinni](https://github.com/TankalaSatyaSai/minions/tree/main/Harshinni)
-- [Praneeth](https://github.com/TankalaSatyaSai/minions/tree/main/Praneeth)
-- [Vidit](https://github.com/TankalaSatyaSai/minions/tree/mainVidit) 
 
 ## Why did we choose that solution? We chose Swarm Robotics because it excels in adapting to dynamic environments, making it suitable for warehouses with changing layouts, varying package sizes, and dynamic obstacles. The adaptive nature ensures robust performance in real-world scenarios. This leads to optimized path planning, efficient obstacle avoidance, and minimized total distance traveled, contributing to overall efficiency in package transportation.
 
